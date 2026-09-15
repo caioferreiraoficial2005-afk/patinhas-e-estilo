@@ -62,7 +62,7 @@
 
 /* ---------- reset ---------- */
 *, *::before, *::after{ box-sizing: border-box; }
-html{ scroll-behavior: smooth; overflow-x: hidden; scroll-padding-top: calc(var(--cabecalho-altura) + 8px); }
+html{ scroll-behavior: smooth; overflow-x: hidden; overflow-x: clip; scroll-padding-top: calc(var(--cabecalho-altura) + 8px); } /* clip, não hidden: hidden no html faz o cabeçalho e a barra fixa tremerem ao rolar no Safari do iPhone */
 body{
   margin:0;
   background: var(--areia);
@@ -83,6 +83,8 @@ body::before{
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 300px 300px;
 }
+/* em tela de toque a textura fixa com mix-blend-mode faz a página tremer ao rolar (Safari do iPhone): fica só no computador */
+@media (hover: none), (pointer: coarse){ body::before{ display:none; } .cabecalho__banner{ filter:none; } }
 img{ max-width:100%; display:block; }
 ul{ list-style:none; margin:0; padding:0; }
 a{ color:inherit; text-decoration:none; }
@@ -295,6 +297,7 @@ svg{ display:block; }
 .marca__nome{ font-family: var(--fonte-display); font-weight:700; font-size:1.15rem; line-height:1; letter-spacing:-.02em; color: var(--tinta); white-space:nowrap; }
 /* logo em imagem no lugar do nome em texto (assets/fotos/logo.png, quadrado, fundo transparente) */
 .marca__logo{ display:block; height:40px; width:auto; }
+@media (max-width: 899px){ .cabecalho .marca{ margin-left: 7%; } } /* no celular a logo entra na placa lisa do osso, fora da ponta arredondada */
 
 .nav ul{ display:flex; align-items:center; gap:26px; }
 .nav a{ font-family: var(--fonte-display); font-weight:600; font-size:1rem; color:var(--tinta); position:relative; padding-bottom:3px; display:inline-block; }
@@ -633,6 +636,7 @@ svg{ display:block; }
 /* =====================================================
    BARRA FIXA WHATSAPP (mobile)
    ===================================================== */
-.barra-zap{ position:fixed; left:0; right:0; bottom:0; z-index:150; background: var(--branco); border-top: 1.5px solid var(--linha); padding: 12px 16px; }
-.barra-zap .botao{ width:100%; }
+/* barra transparente: só o botão aparece por cima do conteúdo (pedido do Caio, 15/09/2026) */
+.barra-zap{ position:fixed; left:0; right:0; bottom:0; z-index:150; background: transparent; padding: 12px 16px; pointer-events:none; }
+.barra-zap .botao{ width:100%; pointer-events:auto; box-shadow: var(--sombra-media); }
 @media (min-width: 900px){ .barra-zap{ display:none; } body{ padding-bottom:0; } }
