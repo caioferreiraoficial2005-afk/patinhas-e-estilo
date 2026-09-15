@@ -325,19 +325,20 @@
         </div>
         <div class="oferecemos__coluna-imagem reveal reveal--direita">
           <div class="blob blob--oferece" aria-hidden="true"></div>
-          <!-- FOTOS DE BANCO (trocar): servico-1 a servico-5.jpg, uma por serviço na ordem
-               banho, tosa, hidratação, penteados e gatos, 1000x800 cada. -->
+          <!-- FOTOS DE BANCO (trocar pelas do Alan quando chegarem): servico-1 a 5.jpg, uma por
+               serviço (banho, tosa, hidratação, laços, gatos), 1000x800. Escolhidas no Pexels em
+               15/09/2026: 6131161, 19145893, 19145879, 8530860, 6131081 (licença livre). -->
           <div class="oferece-imagem-caixa reveal reveal--foto" style="--atraso:.1s" id="js-oferecemos-imagens">
             
-            <img class="oferece-imagem" src="assets/fotos/servico-1.jpg" alt="Cão sendo enxaguado durante o banho">
+            <img class="oferece-imagem" src="assets/fotos/servico-1.jpg" alt="Cão pequeno tomando banho com chuveirinho na mesa de banho">
             
-            <img class="oferece-imagem" src="assets/fotos/servico-2.jpg" alt="Groomer tosando um cão pequeno na mesa">
+            <img class="oferece-imagem" src="assets/fotos/servico-2.jpg" alt="Groomer tosando um Shih Tzu na tesoura, com outro cão esperando">
             
-            <img class="oferece-imagem" src="assets/fotos/servico-3.jpg" alt="Cão de pelo longo bem escovado após hidratação">
+            <img class="oferece-imagem" src="assets/fotos/servico-3.jpg" alt="Cocker spaniel de pelo brilhante sendo escovado">
             
-            <img class="oferece-imagem" src="assets/fotos/servico-4.jpg" alt="Cão pequeno com laço no topete depois da tosa">
+            <img class="oferece-imagem" src="assets/fotos/servico-4.jpg" alt="Chihuahua de pelo longo com gravatinha de laço na mesa de tosa">
             
-            <img class="oferece-imagem" src="assets/fotos/servico-5.jpg" alt="Gato sendo escovado com cuidado">
+            <img class="oferece-imagem" src="assets/fotos/servico-5.jpg" alt="Gato felpudo sendo penteado com cuidado">
             
           </div>
         </div>
@@ -345,10 +346,18 @@
     </div>
   </section>
 
-  <!-- ===================== PROFISSIONAIS · areia ===================== -->
-  <section class="bloco bloco--areia profissionais" id="profissionais">
-    <span class="marca-dagua marca-dagua--esquerda marca-dagua--clara" aria-hidden="true">ALAN</span>
+  <!-- ===================== PROFISSIONAIS · branco ===================== -->
+  <!-- Fundo branco e seção mais curta que as outras (pedido do Caio, 15/09/2026). -->
+  <section class="bloco bloco--branco profissionais" id="profissionais">
+    <span class="marca-dagua marca-dagua--esquerda marca-dagua--areia" aria-hidden="true">EQUIPE</span>
+    <!-- enfeites da equipe: patinhas e ossinhos em laranja, flutuando devagar (CSS: bloco PROFISSIONAIS) -->
     <svg class="deco deco--osso deco--prof-1" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--pata deco--prof-2" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--pata deco--prof-3" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--osso deco--prof-4" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--pata deco--prof-5" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--osso deco--prof-6" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--pata deco--prof-7" aria-hidden="true"><use href="#icon-pata"/></svg>
     <div class="container">
       <p class="eyebrow eyebrow--centro reveal">Quem cuida do seu pet</p>
       <h2 class="titulo-secao titulo-secao--centro reveal" style="--atraso:.1s">Nossos profissionais</h2>
@@ -357,7 +366,7 @@
       <ul class="profissionais__grade profissionais__grade--solo" data-escalonar="140">
         
         <li class="profissional-card reveal">
-          <!-- FOTO DE BANCO (trocar): profissional-1.jpg NÃO é o Alan. Pedir um retrato dele, 800x1000. -->
+          <!-- profissional-1.jpg: foto do Alan enviada pelo Caio em 15/09/2026 (original em ../assets/alan_veterinario_foto.jpg). -->
           <img class="foto profissional-card__foto" src="assets/fotos/profissional-1.jpg" alt="Foto de Alan Cirino">
           <div class="profissional-card__texto">
             <strong>Alan Cirino</strong>
@@ -410,16 +419,19 @@
       <div class="galeria__carrossel reveal reveal--foto">
         <div class="galeria__viewport" id="js-galeria-viewport">
           <!-- o script.js triplica estas células pra fazer o loop infinito -->
-          <!-- FOTOS DE BANCO (trocar): galeria-1 a 3.jpg. Usar as dos destaques Transformação e
-               Penteados do Instagram, com autorização do Alan, em pé (900x1200). -->
+          <!-- FOTOS DE BANCO (trocar): galeria-1 a 8.jpg, em pé (900x1200). Usar as dos destaques
+               Transformação e Penteados do Instagram, com autorização do Alan. As de 4 a 8 são do
+               Pexels (ids 1436139, 19145882, 6131003, 8498858, 23542061), escolhidas em 15/09/2026. -->
+          <!-- o script.js duplica estas células e a esteira anda sem parar (CSS: galeria-anda) -->
           <div class="galeria__trilho" id="js-galeria-trilho">
-            
             <div class="galeria__celula"><img src="assets/fotos/galeria-1.jpg" alt="Cão sendo enxaguado durante o banho"></div>
-            
+            <div class="galeria__celula"><img src="assets/fotos/galeria-4.jpg" alt="Filhote de poodle molhado na banheira"></div>
             <div class="galeria__celula"><img src="assets/fotos/galeria-2.jpg" alt="Cão de pelo longo bem tosado e escovado"></div>
-            
+            <div class="galeria__celula"><img src="assets/fotos/galeria-5.jpg" alt="Cão pequeno molhado sendo tosado no pet spa"></div>
             <div class="galeria__celula"><img src="assets/fotos/galeria-3.jpg" alt="Groomer aparando a pata de um cão pequeno"></div>
-            
+            <div class="galeria__celula"><img src="assets/fotos/galeria-6.jpg" alt="Groomer dando corte em um Yorkshire na mesa"></div>
+            <div class="galeria__celula"><img src="assets/fotos/galeria-7.jpg" alt="Cão branco felpudo sendo escovado"></div>
+            <div class="galeria__celula"><img src="assets/fotos/galeria-8.jpg" alt="Schnauzer bem tosado ao lado da escova"></div>
           </div>
         </div>
       </div>
@@ -477,7 +489,7 @@
       <div class="localizacao__mapa-caixa reveal reveal--foto">
         <!-- MAPS_EMBED_URL: prefira coordenadas (…maps?q=LAT,LNG&output=embed) ao
              endereço em texto, senão o Google pode marcar o lugar errado. -->
-        <iframe title="Mapa até Patinhas & Estilo" src="https://www.google.com/maps?q=-9.62655,-35.72165&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe title="Mapa até Patinhas & Estilo" src="https://www.google.com/maps?q=-9.62655,-35.72182&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <div class="localizacao__info reveal reveal--direita">
@@ -505,7 +517,7 @@
           <li><span>Domingo</span><span>Fechado</span></li>
         </ul>
 
-        <a href="https://maps.google.com/?q=-9.62655,-35.72165" class="botao botao-contorno" target="_blank" rel="noopener">
+        <a href="https://maps.google.com/?q=-9.62655,-35.72182" class="botao botao-contorno" target="_blank" rel="noopener">
           <svg width="17" height="17"><use href="#icon-pin"/></svg>
           Como chegar
         </a>

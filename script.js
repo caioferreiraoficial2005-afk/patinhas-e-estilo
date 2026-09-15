@@ -141,96 +141,25 @@ function reiniciarAutoAvancoOferece() {
 }
 
 /* =========================================================
-   GALERIA · esteira com loop infinito
-   As células do HTML são triplicadas; a esteira desliza de
-   verdade (transform) e, ao sair da faixa do meio, pula sem
-   transição pro mesmo ponto no bloco central.
+   GALERIA · esteira contínua
+   As células do HTML são duplicadas e o trilho anda 50% em
+   loop por animação CSS (galeria-anda). Aqui só se duplica e
+   se calcula a duração: 4 s por foto, pra ficar no mesmo
+   ritmo com 3 ou com 10 fotos. Pausa no hover (CSS) e não
+   anda com prefers-reduced-motion.
    ========================================================= */
-let galeriaTotal = 0;
-let galeriaIndiceAtual = 0; // índice dentro do array TRIPLICADO
-let galeriaTimer = null;
-let galeriaSaltoTimeout = null;
-const GALERIA_INTERVALO = 2000;
-const GALERIA_TRANSICAO_MS = 600;
-
-// mesmos números do CSS (.galeria__celula flex-basis e .galeria__trilho gap)
-const GALERIA_PCT_CELULA_MOBILE = 0.76; // < 700px: 1 foto grande, vizinhas espiando
-const GALERIA_PCT_GAP_MOBILE    = 0.04;
-const GALERIA_PCT_CELULA        = 0.32; // >= 700px: 3 fotos de uma vez
-const GALERIA_PCT_GAP           = 0.02;
-
-function galeriaEhMobile() {
-  return window.matchMedia("(max-width: 699px)").matches;
-}
-
-function medirCelulaGaleria() {
-  const viewport = document.getElementById("js-galeria-viewport");
-  const larguraViewport = viewport ? viewport.getBoundingClientRect().width : 0;
-  const mobile = galeriaEhMobile();
-  return {
-    largura: larguraViewport * (mobile ? GALERIA_PCT_CELULA_MOBILE : GALERIA_PCT_CELULA),
-    espaco: larguraViewport * (mobile ? GALERIA_PCT_GAP_MOBILE : GALERIA_PCT_GAP),
-    larguraViewport
-  };
-}
-
-function posicionarGaleria(comTransicao) {
-  const trilho = document.getElementById("js-galeria-trilho");
-  if (!trilho) return;
-
-  trilho.querySelectorAll(".galeria__celula").forEach((el, i) => {
-    el.classList.toggle("galeria__celula--ativa", i === galeriaIndiceAtual);
-  });
-
-  const { largura, espaco, larguraViewport } = medirCelulaGaleria();
-  const passo = largura + espaco;
-  const offset = galeriaIndiceAtual * passo + largura / 2 - larguraViewport / 2;
-
-  trilho.style.transition = (comTransicao && !reduzMovimento()) ? "" : "none";
-  trilho.style.transform = `translateX(${-offset}px)`;
-}
-
-function girarGaleria(passos) {
-  if (!passos) return;
-  galeriaIndiceAtual += passos;
-  posicionarGaleria(true);
-
-  clearTimeout(galeriaSaltoTimeout);
-  galeriaSaltoTimeout = setTimeout(() => {
-    const normalizado = ((galeriaIndiceAtual % galeriaTotal) + galeriaTotal) % galeriaTotal;
-    galeriaIndiceAtual = normalizado + galeriaTotal;
-    posicionarGaleria(false);
-  }, GALERIA_TRANSICAO_MS + 60);
-}
-
-function reiniciarAutoAvancoGaleria() {
-  clearInterval(galeriaTimer);
-  if (reduzMovimento() || galeriaTotal <= 1) return;
-  galeriaTimer = setInterval(() => girarGaleria(1), GALERIA_INTERVALO);
-}
-
 function iniciarGaleria() {
   const trilho = document.getElementById("js-galeria-trilho");
   if (!trilho) return;
-
   const originais = [...trilho.querySelectorAll(".galeria__celula")];
-  galeriaTotal = originais.length;
-  if (galeriaTotal === 0) return;
-
-  // triplica: bloco da esquerda + original (meio) + bloco da direita
-  originais.forEach(c => trilho.appendChild(c.cloneNode(true)));
-  originais.forEach(c => trilho.appendChild(c.cloneNode(true)));
-
-  // começa no bloco do meio, centralizado na 2ª foto
-  galeriaIndiceAtual = galeriaTotal + Math.min(1, galeriaTotal - 1);
-  posicionarGaleria(false);
-  reiniciarAutoAvancoGaleria();
-
-  // reposiciona sempre que a largura real do carrossel mudar
-  const viewportEl = document.getElementById("js-galeria-viewport");
-  if (viewportEl && window.ResizeObserver) {
-    new ResizeObserver(() => posicionarGaleria(false)).observe(viewportEl);
-  }
+  if (originais.length === 0) return;
+  originais.forEach(c => {
+    const copia = c.cloneNode(true);
+    copia.setAttribute("aria-hidden", "true");
+    trilho.appendChild(copia);
+  });
+  trilho.style.setProperty("--galeria-duracao", `${originais.length * 4}s`);
+  trilho.classList.add("galeria__trilho--anda");
 }
 
 /* =========================================================
