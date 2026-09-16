@@ -19,7 +19,7 @@ JSON do cliente.
 | `servico-1.jpg` … `servico-5.jpg` | Carrossel "O que a gente oferece" (uma por serviço) | 5:4 | 1000 × 800 | 120 KB cada |
 | `profissional-1.jpg`, `profissional-2.jpg` | Cards da equipe (retrato) | 4:5 | 800 × 1000 | 150 KB cada |
 | `galeria-1.jpg` … `galeria-8.jpg` | Esteira contínua de fotos, moldura 3:4. Mande em pé. Pode ter mais ou menos fotos: o script duplica o que estiver no HTML. | 3:4 | 900 × 1200 | 200 KB cada |
-| `capa.jpg` | Preview do link no WhatsApp/Instagram (`og:image`) | ~2:1 | 1600 × 825 | 250 KB |
+| `capa.jpg` | Preview do link no WhatsApp/Instagram (`og:image`). Neste site é a logo centralizada sobre creme, não uma foto. | ~2:1 | 1600 × 825 | 250 KB |
 
 ## Regras práticas
 
