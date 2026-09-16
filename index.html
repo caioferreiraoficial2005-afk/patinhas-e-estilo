@@ -159,8 +159,11 @@
         </button>
       </div>
     </div>
+    <!-- O véu do menu fica DENTRO da .cabecalho__linha de propósito: a linha é animada
+         (entrar-osso), o que cria contexto de empilhamento próprio. Com o véu fora dela,
+         o z-index da gaveta não valia contra o véu e o menu abria escurecido. -->
+    <div class="nav__fundo" id="js-nav-fundo"></div>
   </div>
-  <div class="nav__fundo" id="js-nav-fundo"></div>
 </header>
 
 <main id="conteudo">

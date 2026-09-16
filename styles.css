@@ -279,7 +279,10 @@ svg{ display:block; }
    Se trocar a arte, remedir. A arte é raster com cor fixa
    (osso creme), não recebe a paleta via CSS.
    ===================================================== */
-.cabecalho{ position:sticky; top:0; z-index:100; height: var(--cabecalho-altura); padding-top: 8px; overflow-x: clip; }
+.cabecalho{ position:sticky; top:0; z-index:100; height: var(--cabecalho-altura); padding-top: 8px; }
+/* o clip vale só no computador: no celular ele cortava a gaveta do menu, que é position:fixed
+   (overflow:clip recorta descendente fixo, diferente de overflow:hidden). O body já tem clip. */
+@media (min-width: 900px){ .cabecalho{ overflow-x: clip; } }
 .cabecalho__linha{ position:relative; padding-inline: 0; }
 .cabecalho__banner{
   display:block; width:100%;
