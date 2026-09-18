@@ -8,6 +8,7 @@
      · carrossel de depoimentos
      · menu mobile, link ativo do menu, entradas ao rolar
      · patinha no lugar de um "o" (wordmark e título do hero)
+     · vídeo do sobre, carregado só quando a seção aparece
    Configuração que o script precisa vem de data-* no HTML:
      <body data-whatsapp="5582999999999">
      <a class="js-zap" data-mensagem="Olá! ...">
@@ -17,11 +18,24 @@
 /* =========================================================
    PATA NO LUGAR DO "o"
    Todo elemento com data-pata-ocorrencia="N" tem a N-ésima
-   letra "o" (minúscula) do texto trocada por uma patinha SVG.
+   letra "o" do texto trocada por uma patinha SVG. Conta "o" e
+   "O" juntos: as marcas d'água são caixa alta. Cuidado ao
+   mexer num N que já existe: em "Onde estamos" o primeiro
+   "O" é o da palavra "Onde".
    0 ou vazio = fica como está. O texto completo continua
    disponível pra leitor de tela num <span class="sr-only">.
-   Use em no máximo 3 lugares (wordmark do cabeçalho, título
-   do hero, wordmark do rodapé); mais que isso cansa.
+   Neste site (18/09/2026) são 4, um por trecho da página, e
+   sempre caindo numa palavra que quer dizer alguma coisa:
+     · hero .............. am[pata]r
+     · sobre ............. banh[pata]
+     · galeria ........... trabalh[pata]s
+     · contato ........... estam[pata]s
+   O cabeçalho e o rodapé do template usavam patinha no
+   wordmark, mas aqui os dois viraram logo em imagem, então
+   sobrou espaço. Ficaram DE FORA de propósito: serviços,
+   equipe, formação e depoimentos: se entrar em todo título
+   vira maneirismo e nenhuma chama atenção. Antes de somar
+   uma quinta, tire uma.
    ========================================================= */
 function escaparHtml(s) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -34,7 +48,7 @@ function iniciarPataLetra() {
     if (!n || n < 1 || !texto) return;
     let vistos = 0, pos = -1;
     for (let i = 0; i < texto.length; i++) {
-      if (texto[i] === "o" && ++vistos === n) { pos = i; break; }
+      if ((texto[i] === "o" || texto[i] === "O") && ++vistos === n) { pos = i; break; }
     }
     if (pos < 0) return;
     const ini = texto.lastIndexOf(" ", pos) + 1;
@@ -46,7 +60,10 @@ function iniciarPataLetra() {
       ? `${escaparHtml(texto.slice(0, ini))}<span class="palavra-pata">${palavra}</span>${escaparHtml(texto.slice(fim))}`
       : palavra;
     const srOnly = `<span class="sr-only">${escaparHtml(texto)}</span>`;
-    if (el.classList.contains("marca__nome")) {
+    if (el.getAttribute("aria-hidden") === "true") {
+      // marca d'agua e afins: ja invisivel pro leitor de tela, nao precisa do sr-only
+      el.innerHTML = visual;
+    } else if (el.classList.contains("marca__nome")) {
       el.insertAdjacentHTML("beforebegin", srOnly);
       el.setAttribute("aria-hidden", "true");
       el.innerHTML = visual;
@@ -301,6 +318,29 @@ function iniciarRevelacao() {
 }
 
 /* =========================================================
+   VÍDEO DO SOBRE · o <video> vem sem src. Quando a seção chega
+   perto da tela, o src entra e ele toca (mudo, em loop). Não
+   carrega com prefers-reduced-motion nem com economia de dados
+   do aparelho: aí fica o poster, que é a foto de antes.
+   ========================================================= */
+function iniciarVideoSobre() {
+  const video = document.querySelector(".video-sobre");
+  if (!video || !video.dataset.src) return;
+  if (reduzMovimento() || navigator.connection?.saveData) return;
+  const carregar = () => {
+    if (video.src) return;
+    video.autoplay = true;
+    video.src = video.dataset.src;
+    video.play().catch(() => {});
+  };
+  if (!("IntersectionObserver" in window)) { carregar(); return; }
+  const obs = new IntersectionObserver((entradas, o) => {
+    entradas.forEach(e => { if (e.isIntersecting) { carregar(); o.disconnect(); } });
+  }, { rootMargin: "240px 0px" });
+  obs.observe(video);
+}
+
+/* =========================================================
    INICIALIZAÇÃO
    ========================================================= */
 document.addEventListener("DOMContentLoaded", () => {
@@ -312,6 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarMenuMobile();
   iniciarNavAtiva();
   iniciarRevelacao();
+  iniciarVideoSobre();
   const ano = document.getElementById("js-ano");
   if (ano) ano.textContent = new Date().getFullYear();
 });

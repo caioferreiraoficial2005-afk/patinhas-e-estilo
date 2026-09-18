@@ -354,7 +354,7 @@ svg{ display:block; }
   padding-top: calc(var(--cabecalho-altura) + 28px);
   padding-bottom: 96px;
   overflow: visible; /* os pets vazam pra seção de baixo */
-  --pets-largura: 250px;
+  --pets-largura: 285px;
   --pets-linha: 75.8%;  /* na imagem hero-pets.webp: altura da borda da seção de baixo (o corpo vai um pouco além, escondido) */
 }
 /* gato e cachorro "por cima" da seção seguinte (ver comentário no HTML) */
@@ -385,10 +385,14 @@ svg{ display:block; }
   .hero__acoes, .hero .selo{ display:none; }
   .hero__descricao{ margin-bottom: 8px; }
   /* os pets ficam embaixo do texto, à direita; reserva o espaço deles */
-  .hero{ padding-bottom: calc(var(--pets-largura) * 0.933 * 0.758 + 44px); --pets-largura: 290px; }
+  .hero{ padding-bottom: calc(var(--pets-largura) * 0.933 * 0.758 + 44px); --pets-largura: min(330px, 84vw); }
+  /* folga igual dos dois lados: com 330px fixos e right:52px o gato encostava na borda esquerda */
+  .hero__pets{ right: 8%; }
 }
 @media (min-width: 900px){
-  .hero{ padding-bottom: 110px; min-height: 680px; --pets-largura: min(660px, 44vw); }
+  /* cresce mais rápido que a tela: em 900px não sobra espaço (o gato avança no botão
+     "Ver serviços"), em 1440px já cabe bem maior. Dá 400px em 900, 720px em 1440, teto 740. */
+  .hero{ padding-bottom: 110px; min-height: 680px; --pets-largura: min(740px, 59vw - 130px); }
   .hero__grade{ flex-direction:row; align-items:center; gap:56px; }
   .hero__texto{ flex:1 1 54%; min-width:0; max-width: 620px; }
   .hero__pets{ right: max(64px, 4%); }
@@ -643,3 +647,162 @@ svg{ display:block; }
 .barra-zap{ position:fixed; left:0; right:0; bottom:0; z-index:150; background: transparent; padding: 12px 16px; pointer-events:none; }
 .barra-zap .botao{ width:100%; pointer-events:auto; box-shadow: var(--sombra-media); }
 @media (min-width: 900px){ .barra-zap{ display:none; } body{ padding-bottom:0; } }
+
+/* =====================================================
+   VIDA · enfeites flutuantes, faixa rolante, recortes,
+   fundos com foto/padrão e vídeo (pedido do Caio, 18/09/2026:
+   "o site tá muito simples, sem vida"). Tudo aqui é por cima
+   do que já existia; apagar este bloco devolve o site anterior.
+   Regras que valem pra tudo aqui: nada de background-attachment
+   fixed, nada de mix-blend-mode, só translate/opacity nas
+   animações contínuas: é o que não treme no Safari do iPhone.
+   ===================================================== */
+
+/* --- padrão de patinhas pra fundo (tinta a 7%): o mesmo desenho do icon-pata --- */
+:root{ --padrao-patas: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'><g fill='%235C3A1E' fill-opacity='.07'><g transform='translate(18 22) scale(.5) rotate(-18 50 50)'><ellipse cx='50' cy='68' rx='26' ry='20'/><ellipse cx='20' cy='38' rx='12' ry='15' transform='rotate(-20 20 38)'/><ellipse cx='42' cy='18' rx='12' ry='16' transform='rotate(-8 42 18)'/><ellipse cx='66' cy='18' rx='12' ry='16' transform='rotate(8 66 18)'/><ellipse cx='84' cy='38' rx='12' ry='15' transform='rotate(22 84 38)'/></g><g transform='translate(104 102) scale(.38) rotate(24 50 50)'><ellipse cx='50' cy='68' rx='26' ry='20'/><ellipse cx='20' cy='38' rx='12' ry='15' transform='rotate(-20 20 38)'/><ellipse cx='42' cy='18' rx='12' ry='16' transform='rotate(-8 42 18)'/><ellipse cx='66' cy='18' rx='12' ry='16' transform='rotate(8 66 18)'/><ellipse cx='84' cy='38' rx='12' ry='15' transform='rotate(22 84 38)'/></g></g></svg>"); }
+.hero.bloco--laranja, .certificacoes, .localizacao{ background-image: var(--padrao-patas); }
+
+/* --- enfeites coloridos que flutuam: o esquema da equipe, agora em toda seção --- */
+.deco--vivo{ opacity: var(--op-deco, .26); animation: flutuar var(--dur, 7s) ease-in-out var(--atraso-deco, 0s) infinite alternate; }
+.deco--coracao{ width:60px; height:60px; }
+.bloco--laranja .deco--vivo{ fill: var(--laranja-escuro); --op-deco:.38; }
+.bloco--areia .deco--vivo, .depoimentos .deco--vivo{ fill: var(--laranja); --op-deco:.28; }
+.bloco--amarelo .deco--vivo{ fill: var(--laranja); --op-deco:.34; }
+.bloco--teal .deco--vivo{ fill: var(--teal-escuro); --op-deco:.6; }
+@media (prefers-reduced-motion: reduce){ .deco--vivo{ animation:none; } }
+
+.hero .deco--hero-1{ width:100px; height:100px; transform: rotate(-14deg); --dur:8s; }
+.hero .deco--hero-2{ bottom:auto; top:14%; right:5%; width:76px; height:76px; transform: rotate(28deg); --dur:7s; --atraso-deco:-3s; }
+.hero .deco--hero-3{ top:24%; left:44%; width:54px; height:54px; transform: rotate(-10deg); --dur:6s; --atraso-deco:-1.5s; }
+@media (max-width:899px){ .hero .deco--hero-3{ display:none; } }
+
+.servicos .deco--serv-1{ top:12%; right:2%; width:88px; height:88px; transform: rotate(20deg); --dur:8s; }
+.servicos .deco--serv-2{ bottom:6%; left:2%; width:64px; height:64px; transform: rotate(-24deg); --dur:6.5s; --atraso-deco:-2s; }
+.servicos .deco--serv-3{ top:8%; left:6%; width:44px; height:44px; transform: rotate(12deg); --dur:7.5s; --atraso-deco:-4s; }
+
+.sobre .deco--sobre-1{ width:96px; height:96px; transform: rotate(16deg); --dur:8.5s; }
+.sobre .deco--sobre-2{ width:72px; height:72px; transform: rotate(-28deg); --dur:7s; --atraso-deco:-3s; }
+.sobre .deco--sobre-3{ top:7%; left:47%; width:50px; height:50px; transform: rotate(14deg); --dur:6s; --atraso-deco:-1s; }
+
+.oferecemos .deco--oferece-1{ width:90px; height:90px; transform: rotate(-16deg); --dur:8s; }
+.oferecemos .deco--oferece-2{ bottom:8%; right:3%; width:70px; height:70px; transform: rotate(30deg); --dur:7s; --atraso-deco:-2.5s; }
+.oferecemos .deco--oferece-3{ top:14%; right:7%; width:52px; height:52px; transform: rotate(-12deg); --dur:6.5s; --atraso-deco:-4.5s; }
+
+.certificacoes .deco--cert-1{ width:92px; height:92px; transform: rotate(-20deg); --dur:8s; }
+.certificacoes .deco--cert-2{ width:70px; height:70px; transform: rotate(24deg); --dur:7s; --atraso-deco:-3s; }
+.certificacoes .deco--cert-3{ top:12%; right:8%; width:56px; height:56px; transform: rotate(10deg); --dur:6s; --atraso-deco:-1s; }
+.certificacoes .deco--cert-4{ bottom:30%; left:7%; width:40px; height:40px; transform: rotate(26deg); --dur:7.5s; --atraso-deco:-5s; }
+
+.galeria .deco--galeria-1{ width:96px; height:96px; transform: rotate(18deg); --dur:8s; }
+.galeria .deco--galeria-2{ top:12%; right:3%; width:72px; height:72px; transform: rotate(-26deg); --dur:7s; --atraso-deco:-2s; }
+.galeria .deco--galeria-3{ bottom:12%; left:6%; width:50px; height:50px; transform: rotate(12deg); --dur:6.5s; --atraso-deco:-4s; }
+
+.depoimentos .deco--dep-1{ top:12%; left:6%; width:64px; height:64px; transform: rotate(-14deg); --dur:7s; }
+.depoimentos .deco--dep-2{ top:16%; right:5%; width:84px; height:84px; transform: rotate(22deg); --dur:8s; --atraso-deco:-3s; }
+.depoimentos .deco--dep-3{ bottom:12%; left:10%; width:60px; height:60px; transform: rotate(30deg); --dur:6.5s; --atraso-deco:-1.5s; }
+.depoimentos .deco--dep-4{ bottom:18%; right:9%; width:40px; height:40px; transform: rotate(-8deg); --dur:7.5s; --atraso-deco:-5s; }
+
+.localizacao .deco--loc-1{ width:100px; height:100px; transform: rotate(-16deg); --dur:8s; }
+.localizacao .deco--loc-2{ top:9%; right:6%; width:56px; height:56px; transform: rotate(14deg); --dur:6.5s; --atraso-deco:-2s; }
+.localizacao .deco--loc-3{ top:12%; left:4%; width:60px; height:60px; transform: rotate(-30deg); --dur:7s; --atraso-deco:-4s; }
+@media (max-width:639px){
+  /* no celular sobra menos espaço vazio: fica só um enfeite por canto */
+  .servicos .deco--serv-3, .sobre .deco--sobre-3, .oferecemos .deco--oferece-3, .certificacoes .deco--cert-4,
+  .galeria .deco--galeria-3, .depoimentos .deco--dep-3, .depoimentos .deco--dep-4, .localizacao .deco--loc-3{ display:none; }
+}
+
+/* --- rastro de patinhas: seis patas que acendem em sequência e apagam, em loop --- */
+.rastro{ position:absolute; z-index:0; pointer-events:none; width:300px; height:96px; }
+.rastro__pata{
+  position:absolute; width:30px; height:30px; fill: var(--laranja); opacity:0;
+  left: calc(var(--i) * 48px); bottom: calc(var(--i) * 8px);
+  animation: rastro-passo 6s ease-in-out calc(var(--i) * .4s) infinite;
+}
+.rastro__pata:nth-child(odd){ transform: rotate(-14deg) translateY(-16px); }
+.rastro__pata:nth-child(even){ transform: rotate(16deg); }
+@keyframes rastro-passo{ 0%{ opacity:0; } 8%{ opacity:.42; } 60%{ opacity:.42; } 78%{ opacity:0; } 100%{ opacity:0; } }
+.rastro--sobre{ right:4%; bottom:10px; }
+.rastro--cert{ left:4%; bottom:14px; }
+.rastro--loc{ right:5%; top:16px; }
+@media (prefers-reduced-motion: reduce){ .rastro__pata{ animation:none; opacity:.3; } }
+
+/* --- faixa rolante: fita de papel coral com os serviços passando --- */
+.faixa.bloco{ padding: calc(12px + var(--raio-banner)) 0 calc(12px + var(--raio-banner)); }
+.faixa__trilho{ display:flex; width:max-content; animation: faixa-anda 30s linear infinite; will-change: transform; }
+.faixa__grupo{
+  display:flex; align-items:center; gap:24px; padding-right:24px; white-space:nowrap;
+  font-family: var(--fonte-display); font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+  font-size: clamp(1.05rem, 2vw, 1.4rem); color: var(--branco);
+}
+.faixa__pata{ width:1em; height:1em; fill: var(--amarelo); flex-shrink:0; transform: rotate(-14deg); }
+.faixa:hover .faixa__trilho{ animation-play-state: paused; }
+@keyframes faixa-anda{ to{ transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .faixa__trilho{ animation:none; } }
+
+/* --- recortes: as fotos deixam de ser retângulo e viram adesivo orgânico ---
+   No computador o recorte "respira" (border-radius animado bem devagar); no
+   toque não, porque border-radius repinta a cada quadro. */
+.recorte{ overflow:hidden; }
+.recorte--sobre{ border-radius: 58% 42% 46% 54% / 48% 56% 44% 52%; filter:none; }
+.recorte--oferece{ border-radius: 44% 56% 52% 48% / 56% 44% 56% 44%; }
+.blob--sobre{ border-radius: 46% 54% 58% 42% / 52% 40% 60% 48%; }
+.blob--oferece{ border-radius: 60% 40% 44% 56% / 44% 58% 42% 56%; }
+.recorte--sobre video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+@media (hover:hover) and (prefers-reduced-motion: no-preference){
+  .recorte--sobre, .blob--sobre{ animation: respirar 9s ease-in-out infinite alternate; }
+  .recorte--oferece, .blob--oferece{ animation: respirar-2 11s ease-in-out infinite alternate; }
+}
+@keyframes respirar{ to{ border-radius: 48% 52% 54% 46% / 56% 44% 56% 44%; } }
+@keyframes respirar-2{ to{ border-radius: 54% 46% 40% 60% / 48% 54% 46% 52%; } }
+/* foto do profissional em arco, como uma porta */
+.profissional-card__foto{ border-radius: 50% 50% calc(var(--raio-card) - 10px) calc(var(--raio-card) - 10px) / 34% 34% calc(var(--raio-card) - 10px) calc(var(--raio-card) - 10px); }
+/* galeria: polaroids meio tortas, presas com fita amarela */
+.galeria__celula{ position:relative; }
+.galeria__celula:nth-child(3n+1) img{ transform: rotate(-2.4deg); }
+.galeria__celula:nth-child(3n+2) img{ transform: rotate(1.8deg) translateY(8px); }
+.galeria__celula:nth-child(3n)   img{ transform: rotate(-1deg) translateY(-6px); }
+.galeria__celula::after{
+  content:""; position:absolute; z-index:2; top:-6px; left:50%; width:74px; height:22px;
+  translate: -50% 0; rotate: -3deg; background: var(--amarelo); opacity:.85; border-radius:3px;
+  box-shadow: 0 2px 0 rgba(92,58,30,.12);
+}
+.galeria__celula:nth-child(even)::after{ rotate: 4deg; background: var(--areia-clara); }
+
+/* --- fundos com foto --- */
+/* depoimentos: foto de banco bem lavada de creme; o card branco por cima segura o texto */
+.depoimentos{
+  background-color: var(--areia-clara);
+  background-image: linear-gradient(rgba(255,246,233,.82), rgba(255,246,233,.82)), url("assets/fotos/servico-3.jpg");
+  background-size: cover; background-position: center;
+}
+.depoimentos__caixa{ animation: boiar 6s ease-in-out infinite alternate; }
+@keyframes boiar{ to{ translate: 0 -7px; } }
+@media (prefers-reduced-motion: reduce){ .depoimentos__caixa{ animation:none; } }
+/* faixa "nossa loja": só a fachada, inteira, com um selo no rodapé */
+.faixa-foto.bloco{
+  padding: 0 0 calc(24px + var(--raio-banner)); min-height: 320px;
+  display:flex; align-items:flex-end; justify-content:center;
+  background: var(--areia) url("assets/fotos/fachada-celular.webp") center/cover no-repeat;
+}
+.faixa-foto__conteudo{ position:relative; z-index:1; padding-inline:20px; }
+.faixa-foto .selo{ background: var(--branco); }
+@media (min-width:700px){
+  .faixa-foto.bloco{ min-height: 460px; background-image: url("assets/fotos/fachada.webp"); background-position: center 45%; }
+}
+
+/* --- movimento miúdo --- */
+/* gato e cachorro do hero respiram (nas <img>, nunca no .hero__pets: ver comentário lá em cima) */
+@media (prefers-reduced-motion: no-preference){ .hero__pets img{ animation: pets-respiram 3.8s ease-in-out infinite alternate; } }
+@keyframes pets-respiram{ to{ translate: 0 -7px; } }
+/* ícone do serviço dá uma mexida no hover */
+.servico-item__icone{ transition: transform .3s var(--ease-saida); }
+.servico-item:hover .servico-item__icone{ transform: rotate(-12deg) scale(1.1); }
+/* botão fixo de WhatsApp no celular pulsa um anel (só transform/opacity) */
+.barra-zap .botao{ position:relative; }
+.barra-zap .botao::before{
+  content:""; position:absolute; inset:-3px; border-radius:inherit; border: 3px solid var(--tinta);
+  opacity:.5; pointer-events:none; animation: pulso 2.6s ease-out infinite;
+}
+@keyframes pulso{ 70%{ transform: scale(1.12); opacity:0; } 100%{ transform: scale(1.12); opacity:0; } }
+@media (prefers-reduced-motion: reduce){ .hero__pets img, .barra-zap .botao::before{ animation:none; } }
+

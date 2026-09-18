@@ -57,6 +57,7 @@
       <circle cx="80" cy="42" r="11"/><circle cx="80" cy="58" r="11"/>
     </g>
   </symbol>
+  <symbol id="icon-coracao-cheio" viewBox="0 0 100 100"><path d="M50 90C28 73 6 56 6 34 6 19 17 8 31 8c8 0 15 4 19 11 4-7 11-11 19-11 14 0 25 11 25 26 0 22-22 39-44 56Z"/></symbol>
   <symbol id="icon-coracao" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 4 7 4c2 0 4 1.5 5 3.5C13 5.5 15 4 17 4c4 0 6.5 4.5 4.5 8.5C19 16.65 12 21 12 21Z"/></symbol>
   <symbol id="icon-banho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 3c0 0-6 7.5-6 11.5a6 6 0 0 0 12 0C18 10.5 12 3 12 3Z"/>
@@ -170,8 +171,10 @@
 
   <!-- ===================== HERO · laranja ===================== -->
   <section class="bloco bloco--laranja hero" id="inicio">
-    <svg class="deco deco--pata deco--hero-1" aria-hidden="true"><use href="#icon-pata"/></svg>
-    <svg class="deco deco--osso deco--hero-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <!-- enfeites: patinhas, ossinhos e corações coloridos flutuando (CSS: bloco VIDA) -->
+    <svg class="deco deco--vivo deco--pata deco--hero-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--hero-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--hero-3" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
     <span class="marca-dagua marca-dagua--esquerda marca-dagua--escura" aria-hidden="true">PET</span>
 
     <div class="container hero__grade">
@@ -210,7 +213,10 @@
   <!-- A âncora #sobre do menu fica aqui: pro visitante, "Sobre" é a faixa de
        serviços mais o texto logo abaixo. -->
   <section class="bloco bloco--areia servicos" id="sobre" aria-label="Nossos serviços">
-    <span class="marca-dagua marca-dagua--clara" aria-hidden="true">BANHO</span>
+    <span class="marca-dagua marca-dagua--clara" aria-hidden="true" data-pata-ocorrencia="1">BANHO</span>
+    <svg class="deco deco--vivo deco--pata deco--serv-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--serv-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--serv-3" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
     <div class="container">
       <ul class="servicos__grade" data-escalonar="90">
         
@@ -238,16 +244,36 @@
     </div>
   </section>
 
+  <!-- ===================== FAIXA ROLANTE · coral (feita à mão, 18/09/2026) ===================== -->
+  <!-- Fita de papel entre a areia e o amarelo com os serviços passando sem parar (CSS: faixa-anda).
+       O grupo aparece duas vezes de propósito: o trilho anda -50% e emenda sem pulo. Decorativa,
+       por isso aria-hidden: os serviços já estão escritos logo acima. -->
+  <div class="bloco bloco--teal faixa" aria-hidden="true">
+    <div class="faixa__trilho">
+      <span class="faixa__grupo">Banho<svg class="faixa__pata"><use href="#icon-pata"/></svg>Tosa<svg class="faixa__pata"><use href="#icon-pata"/></svg>Hidratação<svg class="faixa__pata"><use href="#icon-pata"/></svg>Penteados e laços<svg class="faixa__pata"><use href="#icon-pata"/></svg>Gatos e silvestres<svg class="faixa__pata"><use href="#icon-pata"/></svg>Mais de 20 anos de carinho<svg class="faixa__pata"><use href="#icon-pata"/></svg></span>
+      <span class="faixa__grupo">Banho<svg class="faixa__pata"><use href="#icon-pata"/></svg>Tosa<svg class="faixa__pata"><use href="#icon-pata"/></svg>Hidratação<svg class="faixa__pata"><use href="#icon-pata"/></svg>Penteados e laços<svg class="faixa__pata"><use href="#icon-pata"/></svg>Gatos e silvestres<svg class="faixa__pata"><use href="#icon-pata"/></svg>Mais de 20 anos de carinho<svg class="faixa__pata"><use href="#icon-pata"/></svg></span>
+    </div>
+  </div>
+
   <!-- ===================== SOBRE · amarelo ===================== -->
   <section class="bloco bloco--amarelo sobre">
     <span class="marca-dagua marca-dagua--esquerda marca-dagua--amarelo" aria-hidden="true">PATAS</span>
-    <svg class="deco deco--pata deco--sobre-1" aria-hidden="true"><use href="#icon-pata"/></svg>
-    <svg class="deco deco--osso deco--sobre-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--pata deco--sobre-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--sobre-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--sobre-3" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
+    <!-- rastro: seis patinhas que acendem uma depois da outra, como se alguém tivesse passado (CSS: rastro-passo) -->
+    <div class="rastro rastro--sobre" aria-hidden="true"><svg class="rastro__pata" style="--i:0"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:1"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:2"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:3"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:4"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:5"><use href="#icon-pata"/></svg></div>
     <div class="container sobre__grade">
       <div class="sobre__foto-caixa reveal reveal--esquerda">
         <div class="blob blob--sobre" aria-hidden="true"></div>
-        <!-- FOTO DE BANCO (trocar): sobre.jpg, o ideal é o Alan na mesa de tosa, ~900x950. -->
-        <img class="foto foto--sobre reveal reveal--foto" style="--atraso:.15s" src="assets/fotos/sobre.jpg" alt="Groomer cuidando de um cão pequeno na mesa de tosa">
+        <!-- VÍDEO DE BANCO (trocar): assets/videos/banho.mp4, Pexels 6131723 (Tima Miroshnichenko,
+             licença livre), 10 s, 960x540, 1,8 MB. Só carrega quando a seção entra na tela e não toca
+             com prefers-reduced-motion nem com economia de dados (script.js: iniciarVideoSobre). O poster
+             é a foto de antes (sobre.jpg), que fica no lugar do vídeo se ele não carregar. O ideal é um
+             vídeo curto do próprio Alan dando banho, em paisagem. -->
+        <div class="foto foto--sobre recorte recorte--sobre reveal reveal--foto" style="--atraso:.15s">
+          <video class="video-sobre" muted loop playsinline preload="none" poster="assets/fotos/sobre.jpg" data-src="assets/videos/banho.mp4" aria-label="Cão pequeno tomando banho com chuveirinho"></video>
+        </div>
       </div>
 
       <div class="sobre__texto reveal reveal--direita">
@@ -255,7 +281,7 @@
           <svg width="15" height="15"><use href="#icon-coracao"/></svg>
           Mais de 20 anos cuidando do seu pet
         </p>
-        <h2 class="titulo-secao">Um banho e tosa de família, com 20 anos de estrada</h2>
+        <h2 class="titulo-secao" data-pata-ocorrencia="1">Um banho e tosa de família, com 20 anos de estrada</h2>
         <p>A Patinhas & Estilo é um banho e tosa familiar no Feitosa, comandado pelo groomer Alan Cirino, com mais de 20 anos de profissão e várias especializações em tosa. Aqui cada pet é tratado com amor, carinho e respeito, do primeiro banho ao último lacinho.</p>
 
         <ul class="checklist" data-escalonar="70">
@@ -275,8 +301,10 @@
 
   <!-- ===================== O QUE OFERECEMOS · teal ===================== -->
   <section class="bloco bloco--teal oferecemos" id="servicos">
-    <span class="marca-dagua marca-dagua--escura" aria-hidden="true">TOSA</span>
-    <svg class="deco deco--pata deco--oferece-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <span class="marca-dagua marca-dagua--escura" aria-hidden="true" data-pata-ocorrencia="1">TOSA</span>
+    <svg class="deco deco--vivo deco--pata deco--oferece-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--oferece-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--oferece-3" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
     <div class="container">
       <p class="eyebrow eyebrow--centro reveal">Nossos serviços</p>
       <h2 class="titulo-secao titulo-secao--centro reveal" style="--atraso:.1s">O que a gente oferece</h2>
@@ -331,7 +359,7 @@
           <!-- FOTOS DE BANCO (trocar pelas do Alan quando chegarem): servico-1 a 5.jpg, uma por
                serviço (banho, tosa, hidratação, laços, gatos), 1000x800. Escolhidas no Pexels em
                15/09/2026: 6131161, 19145893, 19145879, 8530860, 6131081 (licença livre). -->
-          <div class="oferece-imagem-caixa reveal reveal--foto" style="--atraso:.1s" id="js-oferecemos-imagens">
+          <div class="oferece-imagem-caixa recorte recorte--oferece reveal reveal--foto" style="--atraso:.1s" id="js-oferecemos-imagens">
             
             <img class="oferece-imagem" src="assets/fotos/servico-1.jpg" alt="Cão pequeno tomando banho com chuveirinho na mesa de banho">
             
@@ -391,9 +419,12 @@
 
   <!-- ===================== CERTIFICAÇÕES · amarelo (seção feita à mão, o template não tem) ===================== -->
   <section class="bloco bloco--amarelo certificacoes" id="certificacoes">
-    <span class="marca-dagua marca-dagua--amarelo" aria-hidden="true">CURSOS</span>
-    <svg class="deco deco--pata deco--cert-1" aria-hidden="true"><use href="#icon-pata"/></svg>
-    <svg class="deco deco--osso deco--cert-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <span class="marca-dagua marca-dagua--amarelo" aria-hidden="true" data-pata-ocorrencia="1">CURSOS</span>
+    <svg class="deco deco--vivo deco--pata deco--cert-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--cert-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--cert-3" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
+    <svg class="deco deco--vivo deco--pata deco--cert-4" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <div class="rastro rastro--cert" aria-hidden="true"><svg class="rastro__pata" style="--i:0"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:1"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:2"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:3"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:4"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:5"><use href="#icon-pata"/></svg></div>
     <div class="container">
       <p class="eyebrow eyebrow--centro reveal">Formação</p>
       <h2 class="titulo-secao titulo-secao--centro reveal" style="--atraso:.1s">Especializações ao longo de 20 anos de profissão</h2>
@@ -413,11 +444,13 @@
 
   <!-- ===================== GALERIA · laranja ===================== -->
   <section class="bloco bloco--laranja galeria" id="galeria">
-    <span class="marca-dagua marca-dagua--esquerda marca-dagua--escura" aria-hidden="true">ESTILO</span>
-    <svg class="deco deco--pata deco--galeria-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <span class="marca-dagua marca-dagua--esquerda marca-dagua--escura" aria-hidden="true" data-pata-ocorrencia="1">ESTILO</span>
+    <svg class="deco deco--vivo deco--pata deco--galeria-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--galeria-2" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--galeria-3" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
     <div class="container">
       <p class="eyebrow eyebrow--centro reveal">Trabalho recente</p>
-      <h2 class="titulo-secao titulo-secao--centro reveal" style="--atraso:.1s">Alguns dos nossos trabalhos</h2>
+      <h2 class="titulo-secao titulo-secao--centro reveal" style="--atraso:.1s" data-pata-ocorrencia="4">Alguns dos nossos trabalhos</h2>
 
       <div class="galeria__carrossel reveal reveal--foto">
         <div class="galeria__viewport" id="js-galeria-viewport">
@@ -450,7 +483,11 @@
 
   <!-- ===================== DEPOIMENTOS · areia clara ===================== -->
   <section class="bloco bloco--areia-clara depoimentos">
-    <span class="marca-dagua marca-dagua--areia" aria-hidden="true">AMOR</span>
+    <span class="marca-dagua marca-dagua--areia" aria-hidden="true" data-pata-ocorrencia="1">AMOR</span>
+    <svg class="deco deco--vivo deco--coracao deco--dep-1" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
+    <svg class="deco deco--vivo deco--pata deco--dep-2" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--dep-3" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--dep-4" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
     <div class="container">
       <div class="depoimentos__cabecalho reveal">
         <p class="selo">
@@ -485,9 +522,24 @@
     </div>
   </section>
 
+  <!-- ===================== NOSSA LOJA · foto da fachada (feita à mão, 18/09/2026) ===================== -->
+  <!-- A única foto real do cliente no site, inteira, sem texto por cima: fachada.webp (1920x800, desktop)
+       e fachada-celular.webp (720x900, recorte em pé). Originais em ../assets/fachada_hero_2.png. -->
+  <section class="bloco faixa-foto" aria-label="Fachada da Patinhas & Estilo, no Feitosa">
+    <div class="faixa-foto__conteudo reveal">
+      <p class="selo">
+        <svg width="15" height="15"><use href="#icon-pin"/></svg>
+        Nossa loja, no Feitosa
+      </p>
+    </div>
+  </section>
+
   <!-- ===================== LOCALIZAÇÃO · areia ===================== -->
   <section class="bloco bloco--areia localizacao" id="localizacao">
-    <svg class="deco deco--pata deco--loc-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--pata deco--loc-1" aria-hidden="true"><use href="#icon-pata"/></svg>
+    <svg class="deco deco--vivo deco--coracao deco--loc-2" aria-hidden="true"><use href="#icon-coracao-cheio"/></svg>
+    <svg class="deco deco--vivo deco--osso deco--loc-3" aria-hidden="true"><use href="#icon-osso"/></svg>
+    <div class="rastro rastro--loc" aria-hidden="true"><svg class="rastro__pata" style="--i:0"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:1"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:2"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:3"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:4"><use href="#icon-pata"/></svg><svg class="rastro__pata" style="--i:5"><use href="#icon-pata"/></svg></div>
     <div class="container localizacao__grade">
       <div class="localizacao__mapa-caixa reveal reveal--foto">
         <!-- MAPS_EMBED_URL: prefira coordenadas (…maps?q=LAT,LNG&output=embed) ao
@@ -500,7 +552,8 @@
           <svg width="15" height="15"><use href="#icon-relogio"/></svg>
           Aberto até 18h de segunda a sexta
         </p>
-        <h2 class="titulo-secao">Onde estamos</h2>
+        <!-- 2, nao 1: o primeiro "O" agora e o de "Onde" -->
+        <h2 class="titulo-secao" data-pata-ocorrencia="2">Onde estamos</h2>
 
         <ul class="localizacao__contato" data-escalonar="80">
           <li>
